@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client';
+"use client";
 
-import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { use } from 'react';  // Importing `use` from React
+import { use, useEffect, useState } from "react";
 
 const DeleteMember = ({ params }: any) => {
   // Unwrapping the params using `React.use()`
@@ -13,7 +12,7 @@ const DeleteMember = ({ params }: any) => {
 
   useEffect(() => {
     const fetchMember = async () => {
-      const res = await fetch(`https://next-level-tennis-club.vercel.app/api/members/${id}`);
+      const res = await fetch(`${process.env.SERVER_URL}/api/members/${id}`);
       const data = await res.json();
       setMember(data);
     };
@@ -21,7 +20,7 @@ const DeleteMember = ({ params }: any) => {
   }, [id]);
 
   const handleDelete = async () => {
-    const res = await fetch(`https://next-level-tennis-club.vercel.app/api/members/${id}`, {
+    const res = await fetch(`${process.env.SERVER_URL}/api/members/${id}`, {
       method: "DELETE",
     });
     if (res.ok) {
@@ -37,7 +36,9 @@ const DeleteMember = ({ params }: any) => {
       <h1 className="text-3xl font-bold text-blue-600">Delete Member</h1>
       {member ? (
         <div className="mt-6 p-4 bg-white shadow-md rounded-lg">
-          <p className="text-lg font-semibold">Are you sure you want to delete the following member?</p>
+          <p className="text-lg font-semibold">
+            Are you sure you want to delete the following member?
+          </p>
           <p className="mt-2">Name: {member.name}</p>
           <p>Email: {member.email}</p>
           <p>Phone: {member.phone}</p>

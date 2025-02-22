@@ -1,12 +1,13 @@
-"use client"
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
+"use client";
+import { signOut } from "next-auth/react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/members", label: "Members" },
   { href: "/members/add", label: "Add Member" },
-  { href: "/login", label: "login" },
+  { href: "/profile", label: "Profile" },
 ];
 
 const DashNavbar = () => {
@@ -27,9 +28,16 @@ const DashNavbar = () => {
           {label}
         </Link>
       ))}
+      <div>
+        <button
+          onClick={() => signOut()}
+          className="bg-rose-600 text-white p-2 rounded hover:bg-rose-700"
+        >
+          Logout
+        </button>
+      </div>
     </nav>
   );
 };
 
 export default DashNavbar;
-

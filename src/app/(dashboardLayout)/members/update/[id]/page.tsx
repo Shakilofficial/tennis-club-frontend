@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client';
+"use client";
 
-import { useState, useEffect } from "react";
-import { use } from 'react';  // Importing `use` from React
+import { use, useEffect, useState } from "react";
 
 const UpdateMember = ({ params }: any) => {
   // Unwrapping the params here using `React.use()`
@@ -16,7 +15,7 @@ const UpdateMember = ({ params }: any) => {
 
   useEffect(() => {
     const fetchMember = async () => {
-      const res = await fetch(`https://next-level-tennis-club.vercel.app/api/members/${id}`);
+      const res = await fetch(`${process.env.SERVER_URL}/api/members/${id}`);
       const data = await res.json();
       setMember(data);
     };
@@ -29,7 +28,7 @@ const UpdateMember = ({ params }: any) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const res = await fetch(`https://next-level-tennis-club.vercel.app/api/members/${id}`, {
+    const res = await fetch(`${process.env.SERVER_URL}/api/members/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -48,7 +47,10 @@ const UpdateMember = ({ params }: any) => {
   return (
     <div>
       <h1 className="text-3xl font-bold text-blue-600">Update Member</h1>
-      <form onSubmit={handleSubmit} className="mt-6 p-4 bg-white shadow-md rounded-lg">
+      <form
+        onSubmit={handleSubmit}
+        className="mt-6 p-4 bg-white shadow-md rounded-lg"
+      >
         <input
           type="text"
           name="name"

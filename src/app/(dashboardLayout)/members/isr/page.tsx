@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 async function fetchMembers() {
-  const res = await fetch("https://next-level-tennis-club.vercel.app/api/members", {
+  const res = await fetch(`${process.env.SERVER_URL}/api/members`, {
     next: { revalidate: 10 }, // Regenerate page every 10 seconds
   });
   return res.json();
